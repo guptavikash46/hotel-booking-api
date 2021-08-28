@@ -28,6 +28,10 @@ public class HotelController implements Serializable {
     private Logger logger = LoggerFactory.getLogger(getClass());
     private Map<String, String> errorMsg = new HashMap<>();
 
+    @GetMapping("/")
+    public String helloAdmin() {
+        return "hello admin";
+    }
     @PostMapping("/add-hotel")
     public ResponseEntity<Object> addHotel(@RequestBody Hotel hotel) {
         Optional<Hotel> hotelObj = Optional.of(hotel);
