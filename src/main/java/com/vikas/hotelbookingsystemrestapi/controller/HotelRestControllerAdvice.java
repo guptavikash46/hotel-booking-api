@@ -1,12 +1,14 @@
 package com.vikas.hotelbookingsystemrestapi.controller;
 
 import com.vikas.hotelbookingsystemrestapi.exceptionHandling.CustomError;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
-import org.springframework.web.servlet.NoHandlerFoundException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import javax.validation.ConstraintViolation;
@@ -49,4 +51,20 @@ public class HotelRestControllerAdvice extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(messages, HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(value =  {AuthenticationException.class})
+    protected ResponseEntity<Boolean> authenticationException(RuntimeException ex, WebRequest request) {
+        return new ResponseEntity<>(false, HttpStatus.UNAUTHORIZED);
+    }
+
+//    @ExceptionHandler(MissingServletRequestParameterException.class)
+//    protected ResponseEntity<String> missingReqParameterException(MissingServletRequestParameterException ex, WebRequest request) {
+//        return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+//    }
+
+    @Override
+    protected ResponseEntity<Object> handleMissingServletRequestParameter(MissingServletRequestParameterException ex,
+                                                                          HttpHeaders headers,
+                                                                          HttpStatus status, WebRequest request) {
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+    }
 }

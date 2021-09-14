@@ -65,7 +65,7 @@ public class SessionControllerIntegrationTest {
     @Test
     public void testRedisControlSession() {
         ResponseEntity<String> result = testRestTemplateWithAuth.getForEntity(getTestUrl(), String.class);
-        assertEquals("hello admin", result.getBody()); //login worked
+        assertEquals(true, result.getBody()); //login worked
         logger.info("access granted: "+result.toString());
 
         Set<String> redisData  = jedis.keys("*");
@@ -79,7 +79,7 @@ public class SessionControllerIntegrationTest {
         HttpEntity<String> httpEntity = new HttpEntity<>(httpHeaders);
 
         result = testRestTemplateWithAuth.exchange(getTestUrl(), HttpMethod.GET, httpEntity, String.class);
-        assertEquals("hello admin", result.getBody());  //access with session data works
+        assertEquals(true, result.getBody());  //access with session data works
 
         jedis.flushAll(); //remove all entries from redis
 
@@ -88,6 +88,6 @@ public class SessionControllerIntegrationTest {
     }
 
     private String getTestUrl(){
-        return "http://localhost:" + port;
+        return "http://localhost:" + port+"/login?uname=vikas&pass=1234";
     }
 }

@@ -1,5 +1,6 @@
 package com.vikas.hotelbookingsystemrestapi.controller;
 
+import com.vikas.hotelbookingsystemrestapi.config.SecurityConfig;
 import com.vikas.hotelbookingsystemrestapi.entity.Hotel;
 import com.vikas.hotelbookingsystemrestapi.entity.User;
 import com.vikas.hotelbookingsystemrestapi.exceptionHandling.CustomError;
@@ -25,12 +26,21 @@ public class HotelController implements Serializable {
     private HotelService hotelService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private SecurityConfig securityConfig;
     private Logger logger = LoggerFactory.getLogger(getClass());
     private Map<String, String> errorMsg = new HashMap<>();
 
     @GetMapping("/")
     public String helloAdmin() {
         return "hello admin";
+    }
+
+    @GetMapping("/user")
+    public Map<String, String> user() {
+        Map<String, String> result = new HashMap<>();
+        result.put("msg", "Welcome user!");
+        return result;
     }
     @PostMapping("/add-hotel")
     public ResponseEntity<Object> addHotel(@RequestBody Hotel hotel) {
