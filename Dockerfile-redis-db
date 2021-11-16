@@ -1,0 +1,6 @@
+FROM redis:latest
+
+WORKDIR /app
+
+EXPOSE 6379
+

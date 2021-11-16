@@ -14,7 +14,6 @@ import org.springframework.http.*;
 import org.springframework.test.context.junit4.SpringRunner;
 import redis.clients.jedis.Jedis;
 
-import java.io.IOException;
 import java.util.Set;
 
 import static junit.framework.TestCase.assertEquals;
@@ -90,4 +89,6 @@ public class SessionControllerIntegrationTest {
     private String getTestUrl(){
         return "http://localhost:" + port+"/login?uname=vikas&pass=1234";
     }
+
+
 }

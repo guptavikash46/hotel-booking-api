@@ -32,8 +32,11 @@ public class HotelController implements Serializable {
     private Map<String, String> errorMsg = new HashMap<>();
 
     @GetMapping("/")
-    public String helloAdmin() {
-        return "hello admin";
+    public Map<String, String> helloAdmin() {
+        Map<String, String> result = new HashMap<>();
+        result.put("username", "root");
+        result.put("password", "1234");
+        return result;
     }
 
     @GetMapping("/user")

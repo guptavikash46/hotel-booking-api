@@ -33,7 +33,6 @@ public class LoginDataController {
         Authentication authentication = new UsernamePasswordAuthenticationToken(uname, pass);
         Authentication authenticated = daoAuthenticationProvider.authenticate(authentication);
         SecurityContextHolder.getContext().setAuthentication(authenticated);
-
         return new ResponseEntity<>(true, HttpStatus.OK);
     }
 
@@ -50,4 +49,5 @@ public class LoginDataController {
         responseMsg.put("message","User created successfully");
         return new ResponseEntity<>(responseMsg, HttpStatus.CREATED);
     }
+
 }
