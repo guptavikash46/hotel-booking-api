@@ -19,9 +19,16 @@ public class LoginDataRepository{
     private EntityManager manager;
 
     @Transactional
-    public void registerNewUser(String uname, String pass) {
-        LoginData newUser = new LoginData(uname, pass);
-        manager.persist(newUser);
+    public boolean registerNewUser(String uname, String pass) {
+        try {
+            LoginData newUser = new LoginData(uname, pass);
+            manager.persist(newUser);
+            return true;
+        }
+        catch(Exception e) {
+            return false;
+        }
+        
     }
 
     public LoginData getUserDetails(String username) {

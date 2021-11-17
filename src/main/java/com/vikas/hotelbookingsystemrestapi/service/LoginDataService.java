@@ -26,7 +26,7 @@ public class LoginDataService implements UserDetailsService {
                 loginData.getAuthorities());
     }
 
-    public void registerNewUser(String uname, String pass) {
-        loginDataRepository.registerNewUser(uname, bCryptPasswordEncoder.encode(pass));
+    public boolean registerNewUser(String uname, String pass) {
+        return loginDataRepository.registerNewUser(uname, bCryptPasswordEncoder.encode(pass));
     }
 }

@@ -8,6 +8,12 @@ public class NewUser {
     public String getUname() {
         return uname;
     }
+    public NewUser() {}
+    
+    public NewUser(String uname, String pass) {
+        this.uname = uname;
+        this.pass = pass;
+    }
 
     public void setUname(String uname) {
         this.uname = uname;

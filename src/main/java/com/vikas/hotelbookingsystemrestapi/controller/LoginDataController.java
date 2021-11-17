@@ -42,7 +42,7 @@ public class LoginDataController {
         return new ResponseEntity<>(true, HttpStatus.OK);
     }
     @PostMapping("/register")
-    public ResponseEntity<Map<String,String>> registerNewUser(@RequestBody NewUser newUser) {
+    public ResponseEntity<Map<String, String>> registerNewUser(@RequestBody NewUser newUser) {
         logger.info("Values from user: "+newUser.getUname()+", pass: "+newUser.getPass());
         Map<String, String> responseMsg = new HashMap<>();
         loginDataService.registerNewUser(newUser.getUname(), newUser.getPass());
